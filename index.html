@@ -4,18 +4,21 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>EYFI Campus Ambassador Reward Ladder</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Instrument+Serif:ital@1&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --ink: #171717;
-      --paper: #f6f2e8;
-      --card: #fffdf7;
-      --accent: #b8ff3d;
-      --accent-deep: #78c600;
-      --purple: #7957ff;
-      --orange: #ff8a34;
-      --muted: #777268;
-      --line: #d8d2c5;
-      --shadow: 0 18px 45px rgba(23, 23, 23, 0.12);
+      --ink: #f7f7f5;
+      --paper: #0b0c0d;
+      --card: #121313;
+      --accent: #c4f62e;
+      --accent-deep: #8eb913;
+      --purple: #e8b923;
+      --orange: #ff5a1f;
+      --muted: #8a8a85;
+      --line: #292a2a;
+      --shadow: 0 24px 80px rgba(0, 0, 0, .35);
     }
 
     * { box-sizing: border-box; }
@@ -24,10 +27,12 @@
       margin: 0;
       color: var(--ink);
       background:
-        radial-gradient(circle at 8% 10%, rgba(184, 255, 61, .24), transparent 28%),
-        radial-gradient(circle at 92% 0%, rgba(121, 87, 255, .13), transparent 25%),
+        radial-gradient(circle at 12% 8%, rgba(196, 246, 46, .08), transparent 26%),
+        radial-gradient(circle at 88% 2%, rgba(255, 90, 31, .07), transparent 23%),
+        radial-gradient(circle, rgba(255, 255, 255, .095) 1px, transparent 1px),
         var(--paper);
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background-size: auto, auto, 20px 20px, auto;
+      font-family: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
       min-height: 100vh;
     }
 
@@ -40,11 +45,12 @@
     }
 
     .ticker {
-      border: 2px solid var(--ink);
-      border-radius: 999px;
-      padding: 9px 16px;
+      border: 0;
+      border-radius: 0;
+      padding: 10px 16px;
       overflow: hidden;
-      background: var(--accent);
+      background: var(--orange);
+      color: #090909;
       font-size: 12px;
       font-weight: 900;
       letter-spacing: .11em;
@@ -85,7 +91,7 @@
       content: "";
       width: 11px;
       height: 11px;
-      background: var(--purple);
+      background: var(--orange);
       border-radius: 3px;
       transform: rotate(12deg);
     }
@@ -96,12 +102,15 @@
       font-size: clamp(42px, 7vw, 86px);
       line-height: .92;
       letter-spacing: -.065em;
+      font-family: "Bricolage Grotesque", "Space Grotesk", sans-serif;
+      font-weight: 800;
     }
 
     .highlight {
       position: relative;
       display: inline-block;
       z-index: 1;
+      color: var(--accent);
     }
 
     .highlight::after {
@@ -113,25 +122,25 @@
       bottom: .04em;
       height: .27em;
       border-radius: 999px;
-      background: var(--accent);
+      background: rgba(196, 246, 46, .18);
       transform: rotate(-1.5deg);
     }
 
     .intro {
       margin: 0;
       max-width: 420px;
-      color: #403d37;
+      color: #c8c8c4;
       font-size: 17px;
       line-height: 1.55;
     }
 
     .panel {
-      border: 2px solid var(--ink);
-      border-radius: 28px;
-      background: rgba(255, 253, 247, .82);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: rgba(13, 14, 14, .96);
       box-shadow: var(--shadow);
       overflow: hidden;
-      backdrop-filter: blur(12px);
+      backdrop-filter: blur(16px);
     }
 
     .controls {
@@ -140,7 +149,8 @@
       gap: 24px;
       align-items: center;
       padding: 24px;
-      border-bottom: 2px solid var(--ink);
+      border-bottom: 1px solid var(--line);
+      background: #111;
     }
 
     .control-label {
@@ -162,14 +172,14 @@
       width: 100%;
       appearance: none;
       height: 10px;
-      border: 2px solid var(--ink);
+      border: 1px solid #424a2a;
       border-radius: 999px;
       background: linear-gradient(
         90deg,
         var(--accent) 0%,
         var(--accent) var(--fill, 0%),
-        #ece7db var(--fill, 0%),
-        #ece7db 100%
+        #262826 var(--fill, 0%),
+        #262826 100%
       );
       cursor: pointer;
     }
@@ -178,27 +188,27 @@
       appearance: none;
       width: 28px;
       height: 28px;
-      border: 3px solid var(--ink);
+      border: 3px solid var(--accent);
       border-radius: 50%;
-      background: var(--card);
-      box-shadow: 3px 3px 0 var(--ink);
+      background: #0a0a0a;
+      box-shadow: 0 0 0 4px rgba(196, 246, 46, .13);
     }
 
     input[type="range"]::-moz-range-thumb {
       width: 24px;
       height: 24px;
-      border: 3px solid var(--ink);
+      border: 3px solid var(--accent);
       border-radius: 50%;
-      background: var(--card);
-      box-shadow: 3px 3px 0 var(--ink);
+      background: #0a0a0a;
+      box-shadow: 0 0 0 4px rgba(196, 246, 46, .13);
     }
 
     .score-box {
       min-width: 182px;
-      border: 2px solid var(--ink);
-      border-radius: 20px;
+      border: 1px solid #292a2a;
+      border-radius: 14px;
       padding: 15px 17px;
-      background: var(--ink);
+      background: #090a0a;
       color: white;
     }
 
@@ -212,6 +222,7 @@
       font-size: 42px;
       line-height: .9;
       letter-spacing: -.04em;
+      color: var(--purple);
     }
 
     .score-number span {
@@ -227,16 +238,19 @@
       margin-top: 12px;
       width: 100%;
       border: 0;
-      border-radius: 12px;
+      border-radius: 999px;
       padding: 9px 12px;
       background: var(--accent);
-      color: var(--ink);
+      color: #090909;
       font-weight: 900;
       cursor: pointer;
       transition: transform .15s ease;
     }
 
-    .demo-button:hover { transform: translateY(-2px); }
+    .demo-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 0 #73920f;
+    }
     .demo-button:disabled { opacity: .65; cursor: wait; }
 
     .status {
@@ -245,7 +259,7 @@
       gap: 16px;
       align-items: center;
       padding: 18px 24px;
-      background: #fff;
+      background: #0f1010;
       border-bottom: 1px solid var(--line);
     }
 
@@ -254,11 +268,12 @@
       place-items: center;
       width: 48px;
       height: 48px;
-      border: 2px solid var(--ink);
-      border-radius: 16px;
-      background: var(--accent);
+      border: 1px solid #6f5009;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 25%, #fff6d0 0%, #ffde6e 30%, #f0ac1f 65%, #c9820d 100%);
       font-size: 23px;
       transform: rotate(-3deg);
+      box-shadow: 3px 4px 0 #604407;
     }
 
     .status p { margin: 0; }
@@ -275,13 +290,14 @@
     }
 
     .next-pill {
-      border: 2px solid var(--ink);
+      border: 1px solid rgba(196, 246, 46, .45);
       border-radius: 999px;
       padding: 9px 13px;
       font-size: 12px;
       font-weight: 900;
       white-space: nowrap;
-      background: #fff6dc;
+      background: rgba(196, 246, 46, .07);
+      color: var(--accent);
     }
 
     .ladder-wrap {
@@ -305,9 +321,9 @@
       left: 7.5%;
       right: 7.5%;
       height: 8px;
-      border: 2px solid var(--ink);
+      border: 1px solid #3a3e2e;
       border-radius: 999px;
-      background: #ece7db;
+      background: #242525;
       overflow: hidden;
     }
 
@@ -326,10 +342,10 @@
       place-items: center;
       width: 38px;
       height: 38px;
-      border: 2px solid var(--ink);
+      border: 2px solid var(--accent);
       border-radius: 50%;
-      background: var(--purple);
-      box-shadow: 3px 3px 0 var(--ink);
+      background: #0a0a0a;
+      box-shadow: 0 0 0 5px rgba(196, 246, 46, .1);
       transform: translateX(-50%);
       transition: left .45s cubic-bezier(.2,.9,.2,1);
       z-index: 4;
@@ -338,14 +354,14 @@
 
     .level {
       position: relative;
-      border: 2px solid var(--ink);
-      border-radius: 20px;
+      border: 1px solid #292a2a;
+      border-radius: 14px;
       padding: 18px 15px 16px;
       min-height: 210px;
-      background: #f0ece2;
+      background: #111;
       cursor: pointer;
       transition: transform .22s ease, background .22s ease, box-shadow .22s ease, opacity .22s ease;
-      opacity: .58;
+      opacity: .42;
     }
 
     .level:hover { transform: translateY(-5px) rotate(-.4deg); }
@@ -357,15 +373,16 @@
       left: 50%;
       width: 18px;
       height: 18px;
-      border: 3px solid var(--ink);
+      border: 2px solid #555;
       border-radius: 50%;
-      background: #ece7db;
+      background: #1e1e1e;
       transform: translateX(-50%);
       z-index: 2;
     }
 
     .level.unlocked {
-      background: var(--card);
+      background: rgba(232, 185, 35, .06);
+      border-color: rgba(232, 185, 35, .4);
       opacity: 1;
     }
 
@@ -373,14 +390,15 @@
 
     .level.current {
       transform: translateY(-9px) rotate(-.6deg);
-      background: var(--accent);
-      box-shadow: 7px 7px 0 var(--ink);
+      background: rgba(196, 246, 46, .09);
+      border-color: rgba(196, 246, 46, .65);
+      box-shadow: 0 0 0 1px rgba(196, 246, 46, .12), 0 18px 34px rgba(0, 0, 0, .3);
       opacity: 1;
     }
 
     .level.current::before {
-      background: var(--purple);
-      box-shadow: 0 0 0 5px rgba(121, 87, 255, .17);
+      background: var(--accent);
+      box-shadow: 0 0 0 5px rgba(196, 246, 46, .12);
     }
 
     .level-number {
@@ -390,9 +408,10 @@
       min-width: 36px;
       height: 28px;
       padding: 0 8px;
-      border: 2px solid var(--ink);
+      border: 1px solid rgba(196, 246, 46, .45);
       border-radius: 999px;
-      background: #fff;
+      background: #0c0d0d;
+      color: var(--accent);
       font-size: 12px;
       font-weight: 950;
     }
@@ -408,11 +427,13 @@
       font-size: 18px;
       line-height: 1.05;
       letter-spacing: -.025em;
+      color: #fff;
+      font-family: "Bricolage Grotesque", "Space Grotesk", sans-serif;
     }
 
     .level p {
       margin: 9px 0 0;
-      color: #514d45;
+      color: var(--muted);
       font-size: 13px;
       line-height: 1.43;
     }
