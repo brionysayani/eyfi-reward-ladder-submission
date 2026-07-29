@@ -464,8 +464,144 @@
       .controls { grid-template-columns: 1fr; }
       .score-box { min-width: 0; }
       .status { grid-template-columns: auto 1fr; }
-      .next-pill { grid-column: 1 / -1; width: max-content; }
+      .next-pill {
+        grid-column: 1 / -1;
+        width: fit-content;
+        max-width: 100%;
+        white-space: normal;
+        line-height: 1.35;
+      }
       .footer-note { flex-direction: column; gap: 4px; }
+    }
+
+    @media (max-width: 600px) {
+      .page {
+        width: min(100% - 16px, 430px);
+        padding-bottom: 24px;
+      }
+
+      .ticker {
+        padding: 8px 12px;
+        font-size: 10px;
+      }
+
+      header {
+        gap: 18px;
+        margin: 26px 4px 22px;
+      }
+
+      h1 {
+        font-size: clamp(38px, 11.7vw, 48px);
+        letter-spacing: -.055em;
+      }
+
+      .intro {
+        font-size: 16px;
+        line-height: 1.45;
+      }
+
+      .panel { border-radius: 22px; }
+
+      .controls {
+        gap: 20px;
+        padding: 20px 16px;
+      }
+
+      .control-label {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 3px;
+      }
+
+      input[type="range"] {
+        height: 12px;
+        margin: 8px 0;
+        touch-action: pan-x;
+      }
+
+      input[type="range"]::-webkit-slider-thumb {
+        width: 32px;
+        height: 32px;
+      }
+
+      input[type="range"]::-moz-range-thumb {
+        width: 28px;
+        height: 28px;
+      }
+
+      .score-box { padding: 14px 16px; }
+
+      .status {
+        grid-template-columns: 44px minmax(0, 1fr);
+        gap: 12px;
+        padding: 16px;
+      }
+
+      .status > div:nth-child(2) { min-width: 0; }
+
+      #statusText { overflow-wrap: anywhere; }
+
+      .next-pill {
+        width: 100%;
+        overflow-wrap: anywhere;
+      }
+
+      .status-icon {
+        width: 44px;
+        height: 44px;
+      }
+
+      .ladder-wrap {
+        padding: 22px 16px;
+        overflow-x: visible;
+      }
+
+      .ladder {
+        grid-template-columns: 1fr;
+        gap: 12px;
+        min-width: 0;
+        padding-top: 0;
+      }
+
+      .track { display: none; }
+
+      .level {
+        min-height: 0;
+        padding: 16px 14px 15px 72px;
+        opacity: .68;
+      }
+
+      .level::before { display: none; }
+
+      .level.current {
+        transform: none;
+        box-shadow: 5px 5px 0 var(--ink);
+      }
+
+      .level:hover { transform: none; }
+
+      .level-icon {
+        position: absolute;
+        top: 48px;
+        left: 18px;
+        margin: 0;
+        font-size: 30px;
+      }
+
+      .level h3 {
+        padding-right: 72px;
+        font-size: 17px;
+      }
+
+      .level p { font-size: 13px; }
+
+      .lock {
+        top: 17px;
+        right: 13px;
+        font-size: 11px;
+      }
+
+      .footer-note { padding: 14px 16px 16px; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -489,10 +625,11 @@
     <header>
       <div>
         <div class="eyebrow">EYFI Ambassador Rewards</div>
-        <h1>Your campus.<br>Your <span class="highlight">climb.</span></h1>
+        <h1>YOUR CAMPUS.<br>YOUR <span class="highlight">CLIMB.</span></h1>
       </div>
       <p class="intro">
-        Every registration moves your campus story forward. Build traction, cross milestones and unlock rewards that get bigger with your impact.
+        Turn conversations into registrations.<br>
+        Turn registrations into real opportunities.
       </p>
     </header>
 
@@ -519,9 +656,9 @@
         <div class="status-icon" id="statusIcon">🧭</div>
         <div>
           <p id="statusTitle">Selected as Scout</p>
-          <p id="statusText">Private community access + starter kit</p>
+          <p id="statusText">You’re in. Start conversations and put your campus on the EYFI map.</p>
         </div>
-        <div class="next-pill" id="nextPill">25 to next unlock</div>
+        <div class="next-pill" id="nextPill">25 more registrations to unlock the Campus Ambassador title.</div>
       </div>
 
       <div class="ladder-wrap">
@@ -536,7 +673,7 @@
             <span class="lock"></span>
             <div class="level-icon">🧭</div>
             <h3>Selected as Scout</h3>
-            <p>Private community access + starter kit</p>
+            <p>You’re in. Start conversations and put your campus on the EYFI map.</p>
           </article>
 
           <article class="level" data-threshold="25">
@@ -544,7 +681,7 @@
             <span class="lock"></span>
             <div class="level-icon">🏅</div>
             <h3>Official Campus Ambassador</h3>
-            <p>Official title, first swag drop + prize-linked challenge</p>
+            <p>You’ve earned the Campus Ambassador title.</p>
           </article>
 
           <article class="level" data-threshold="50">
@@ -552,7 +689,7 @@
             <span class="lock"></span>
             <div class="level-icon">🎪</div>
             <h3>Campus Builder</h3>
-            <p>Event grants for your campus + exclusive merch</p>
+            <p>Every registration from here builds your campus event fund.</p>
           </article>
 
           <article class="level" data-threshold="75">
@@ -560,7 +697,7 @@
             <span class="lock"></span>
             <div class="level-icon">🧠</div>
             <h3>Momentum Maker</h3>
-            <p>Mentorship access + campus event grants</p>
+            <p>Mentorship unlocked. Keep the momentum moving across campus.</p>
           </article>
 
           <article class="level" data-threshold="100">
@@ -568,7 +705,7 @@
             <span class="lock"></span>
             <div class="level-icon">🚀</div>
             <h3>EYFI Insider</h3>
-            <p>Paid internship opportunities + ambassador events</p>
+            <p>You’re now in range for paid internships and ambassador events.</p>
           </article>
 
           <article class="level" data-threshold="200">
@@ -576,7 +713,7 @@
             <span class="lock"></span>
             <div class="level-icon">⭐</div>
             <h3>Founding Team Consideration</h3>
-            <p>Consideration for the team shaping EYFI's next wave</p>
+            <p>You built a movement. EYFI’s founding team is paying attention.</p>
           </article>
         </div>
       </div>
@@ -590,12 +727,12 @@
 
   <script>
     const milestones = [
-      { threshold: 0, title: "Selected as Scout", reward: "Private community access + starter kit", icon: "🧭" },
-      { threshold: 25, title: "Official Campus Ambassador", reward: "Official title, first swag drop + prize-linked challenge", icon: "🏅" },
-      { threshold: 50, title: "Campus Builder", reward: "Event grants for your campus + exclusive merch", icon: "🎪" },
-      { threshold: 75, title: "Momentum Maker", reward: "Mentorship access + campus event grants", icon: "🧠" },
-      { threshold: 100, title: "EYFI Insider", reward: "Paid internship opportunities + ambassador events", icon: "🚀" },
-      { threshold: 200, title: "Founding Team Consideration", reward: "Consideration for the team shaping EYFI's next wave", icon: "⭐" }
+      { threshold: 0, title: "Selected as Scout", reward: "You’re in. Start conversations and put your campus on the EYFI map.", unlock: "the Campus Ambassador title", icon: "🧭" },
+      { threshold: 25, title: "Official Campus Ambassador", reward: "You’ve earned the Campus Ambassador title.", unlock: "your campus event fund", icon: "🏅" },
+      { threshold: 50, title: "Campus Builder", reward: "Every registration from here builds your campus event fund.", unlock: "mentorship", icon: "🎪" },
+      { threshold: 75, title: "Momentum Maker", reward: "Mentorship unlocked. Keep the momentum moving across campus.", unlock: "EYFI Insider access", icon: "🧠" },
+      { threshold: 100, title: "EYFI Insider", reward: "You’re now in range for paid internships and ambassador events.", unlock: "Founding Team consideration", icon: "🚀" },
+      { threshold: 200, title: "Founding Team Consideration", reward: "You built a movement. EYFI’s founding team is paying attention.", unlock: "", icon: "⭐" }
     ];
 
     const slider = document.getElementById("registrationSlider");
@@ -658,9 +795,11 @@
       statusIcon.textContent = active.icon;
 
       if (next) {
-        nextPill.textContent = `${next.threshold - value} to next unlock`;
+        const remaining = next.threshold - value;
+        const registrationWord = remaining === 1 ? "registration" : "registrations";
+        nextPill.textContent = `${remaining} more ${registrationWord} to unlock ${active.unlock}.`;
       } else {
-        nextPill.textContent = "All rewards unlocked ✦";
+        nextPill.textContent = "You’ve unlocked the full EYFI climb. ✦";
       }
 
       if (celebrate && activeIndex > previousLevelIndex) {
