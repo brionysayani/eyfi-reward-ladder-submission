@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EYFI Campus Ambassador Reward Ladder</title>
+  <style>
+    :root {
+      --ink: #171717;
+      --paper: #f6f2e8;
+      --card: #fffdf7;
+      --accent: #b8ff3d;
+      --accent-deep: #78c600;
+      --purple: #7957ff;
+      --orange: #ff8a34;
+      --muted: #777268;
+      --line: #d8d2c5;
+      --shadow: 0 18px 45px rgba(23, 23, 23, 0.12);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 8% 10%, rgba(184, 255, 61, .24), transparent 28%),
+        radial-gradient(circle at 92% 0%, rgba(121, 87, 255, .13), transparent 25%),
+        var(--paper);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      min-height: 100vh;
+    }
+
+    button, input { font: inherit; }
+
+    .page {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 36px 0 54px;
+    }
+
+    .ticker {
+      border: 2px solid var(--ink);
+      border-radius: 999px;
+      padding: 9px 16px;
+      overflow: hidden;
+      background: var(--accent);
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: .11em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .ticker-track {
+      display: inline-block;
+      animation: ticker 18s linear infinite;
+    }
+
+    @keyframes ticker {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    header {
+      display: grid;
+      grid-template-columns: 1.25fr .75fr;
+      align-items: end;
+      gap: 28px;
+      margin: 45px 0 28px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: .13em;
+      margin-bottom: 14px;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 11px;
+      height: 11px;
+      background: var(--purple);
+      border-radius: 3px;
+      transform: rotate(12deg);
+    }
+
+    h1 {
+      margin: 0;
+      max-width: 750px;
+      font-size: clamp(42px, 7vw, 86px);
+      line-height: .92;
+      letter-spacing: -.065em;
+    }
+
+    .highlight {
+      position: relative;
+      display: inline-block;
+      z-index: 1;
+    }
+
+    .highlight::after {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      left: -2%;
+      right: -2%;
+      bottom: .04em;
+      height: .27em;
+      border-radius: 999px;
+      background: var(--accent);
+      transform: rotate(-1.5deg);
+    }
+
+    .intro {
+      margin: 0;
+      max-width: 420px;
+      color: #403d37;
+      font-size: 17px;
+      line-height: 1.55;
+    }
+
+    .panel {
+      border: 2px solid var(--ink);
+      border-radius: 28px;
+      background: rgba(255, 253, 247, .82);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      backdrop-filter: blur(12px);
+    }
+
+    .controls {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 24px;
+      align-items: center;
+      padding: 24px;
+      border-bottom: 2px solid var(--ink);
+    }
+
+    .control-label {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 12px;
+      margin-bottom: 13px;
+      font-weight: 900;
+    }
+
+    .control-label span:last-child {
+      font-size: 13px;
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    input[type="range"] {
+      width: 100%;
+      appearance: none;
+      height: 10px;
+      border: 2px solid var(--ink);
+      border-radius: 999px;
+      background: linear-gradient(
+        90deg,
+        var(--accent) 0%,
+        var(--accent) var(--fill, 0%),
+        #ece7db var(--fill, 0%),
+        #ece7db 100%
+      );
+      cursor: pointer;
+    }
+
+    input[type="range"]::-webkit-slider-thumb {
+      appearance: none;
+      width: 28px;
+      height: 28px;
+      border: 3px solid var(--ink);
+      border-radius: 50%;
+      background: var(--card);
+      box-shadow: 3px 3px 0 var(--ink);
+    }
+
+    input[type="range"]::-moz-range-thumb {
+      width: 24px;
+      height: 24px;
+      border: 3px solid var(--ink);
+      border-radius: 50%;
+      background: var(--card);
+      box-shadow: 3px 3px 0 var(--ink);
+    }
+
+    .score-box {
+      min-width: 182px;
+      border: 2px solid var(--ink);
+      border-radius: 20px;
+      padding: 15px 17px;
+      background: var(--ink);
+      color: white;
+    }
+
+    .score-number {
+      display: flex;
+      align-items: flex-end;
+      gap: 7px;
+    }
+
+    .score-number strong {
+      font-size: 42px;
+      line-height: .9;
+      letter-spacing: -.04em;
+    }
+
+    .score-number span {
+      margin-bottom: 3px;
+      font-size: 12px;
+      color: #d6d1c8;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+
+    .demo-button {
+      margin-top: 12px;
+      width: 100%;
+      border: 0;
+      border-radius: 12px;
+      padding: 9px 12px;
+      background: var(--accent);
+      color: var(--ink);
+      font-weight: 900;
+      cursor: pointer;
+      transition: transform .15s ease;
+    }
+
+    .demo-button:hover { transform: translateY(-2px); }
+    .demo-button:disabled { opacity: .65; cursor: wait; }
+
+    .status {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 16px;
+      align-items: center;
+      padding: 18px 24px;
+      background: #fff;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .status-icon {
+      display: grid;
+      place-items: center;
+      width: 48px;
+      height: 48px;
+      border: 2px solid var(--ink);
+      border-radius: 16px;
+      background: var(--accent);
+      font-size: 23px;
+      transform: rotate(-3deg);
+    }
+
+    .status p { margin: 0; }
+
+    #statusTitle {
+      font-weight: 950;
+      font-size: 17px;
+    }
+
+    #statusText {
+      margin-top: 3px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .next-pill {
+      border: 2px solid var(--ink);
+      border-radius: 999px;
+      padding: 9px 13px;
+      font-size: 12px;
+      font-weight: 900;
+      white-space: nowrap;
+      background: #fff6dc;
+    }
+
+    .ladder-wrap {
+      position: relative;
+      padding: 36px 24px 30px;
+      overflow-x: auto;
+    }
+
+    .ladder {
+      position: relative;
+      display: grid;
+      grid-template-columns: repeat(6, minmax(155px, 1fr));
+      gap: 14px;
+      min-width: 1030px;
+      padding-top: 40px;
+    }
+
+    .track {
+      position: absolute;
+      top: 22px;
+      left: 7.5%;
+      right: 7.5%;
+      height: 8px;
+      border: 2px solid var(--ink);
+      border-radius: 999px;
+      background: #ece7db;
+      overflow: hidden;
+    }
+
+    .track-fill {
+      width: 0%;
+      height: 100%;
+      background: var(--accent);
+      transition: width .45s cubic-bezier(.2,.9,.2,1);
+    }
+
+    .runner {
+      position: absolute;
+      top: -17px;
+      left: 0%;
+      display: grid;
+      place-items: center;
+      width: 38px;
+      height: 38px;
+      border: 2px solid var(--ink);
+      border-radius: 50%;
+      background: var(--purple);
+      box-shadow: 3px 3px 0 var(--ink);
+      transform: translateX(-50%);
+      transition: left .45s cubic-bezier(.2,.9,.2,1);
+      z-index: 4;
+      font-size: 18px;
+    }
+
+    .level {
+      position: relative;
+      border: 2px solid var(--ink);
+      border-radius: 20px;
+      padding: 18px 15px 16px;
+      min-height: 210px;
+      background: #f0ece2;
+      cursor: pointer;
+      transition: transform .22s ease, background .22s ease, box-shadow .22s ease, opacity .22s ease;
+      opacity: .58;
+    }
+
+    .level:hover { transform: translateY(-5px) rotate(-.4deg); }
+
+    .level::before {
+      content: "";
+      position: absolute;
+      top: -28px;
+      left: 50%;
+      width: 18px;
+      height: 18px;
+      border: 3px solid var(--ink);
+      border-radius: 50%;
+      background: #ece7db;
+      transform: translateX(-50%);
+      z-index: 2;
+    }
+
+    .level.unlocked {
+      background: var(--card);
+      opacity: 1;
+    }
+
+    .level.unlocked::before { background: var(--accent); }
+
+    .level.current {
+      transform: translateY(-9px) rotate(-.6deg);
+      background: var(--accent);
+      box-shadow: 7px 7px 0 var(--ink);
+      opacity: 1;
+    }
+
+    .level.current::before {
+      background: var(--purple);
+      box-shadow: 0 0 0 5px rgba(121, 87, 255, .17);
+    }
+
+    .level-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 36px;
+      height: 28px;
+      padding: 0 8px;
+      border: 2px solid var(--ink);
+      border-radius: 999px;
+      background: #fff;
+      font-size: 12px;
+      font-weight: 950;
+    }
+
+    .level-icon {
+      margin: 21px 0 13px;
+      font-size: 31px;
+      line-height: 1;
+    }
+
+    .level h3 {
+      margin: 0;
+      font-size: 18px;
+      line-height: 1.05;
+      letter-spacing: -.025em;
+    }
+
+    .level p {
+      margin: 9px 0 0;
+      color: #514d45;
+      font-size: 13px;
+      line-height: 1.43;
+    }
+
+    .lock {
+      position: absolute;
+      top: 15px;
+      right: 13px;
+      font-size: 13px;
+      font-weight: 900;
+    }
+
+    .level.unlocked .lock::after { content: "UNLOCKED"; }
+    .level:not(.unlocked) .lock::after { content: "LOCKED"; }
+    .level.current .lock::after { content: "YOU'RE HERE"; }
+
+    .footer-note {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 15px 24px 18px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .confetti-piece {
+      position: fixed;
+      top: -20px;
+      width: 10px;
+      height: 18px;
+      border: 2px solid var(--ink);
+      z-index: 20;
+      pointer-events: none;
+      animation: fall 1.6s ease-in forwards;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translate3d(var(--drift), 110vh, 0) rotate(760deg);
+        opacity: .9;
+      }
+    }
+
+    @media (max-width: 800px) {
+      .page { width: min(100% - 20px, 680px); padding-top: 16px; }
+      header { grid-template-columns: 1fr; margin-top: 30px; }
+      .controls { grid-template-columns: 1fr; }
+      .score-box { min-width: 0; }
+      .status { grid-template-columns: auto 1fr; }
+      .next-pill { grid-column: 1 / -1; width: max-content; }
+      .footer-note { flex-direction: column; gap: 4px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <div class="ticker" aria-hidden="true">
+      <div class="ticker-track">
+        ✦ EARNED, NOT HANDED&nbsp;&nbsp;&nbsp; ✦ BUILD EYFI ON YOUR CAMPUS&nbsp;&nbsp;&nbsp; ✦ WAVE 01 SCOUTS&nbsp;&nbsp;&nbsp; ✦ YOUR CAMPUS. YOUR CLIMB.&nbsp;&nbsp;&nbsp;
+        ✦ EARNED, NOT HANDED&nbsp;&nbsp;&nbsp; ✦ BUILD EYFI ON YOUR CAMPUS&nbsp;&nbsp;&nbsp; ✦ WAVE 01 SCOUTS&nbsp;&nbsp;&nbsp; ✦ YOUR CAMPUS. YOUR CLIMB.&nbsp;&nbsp;&nbsp;
+      </div>
+    </div>
+
+    <header>
+      <div>
+        <div class="eyebrow">EYFI Ambassador Rewards</div>
+        <h1>Your campus.<br>Your <span class="highlight">climb.</span></h1>
+      </div>
+      <p class="intro">
+        Every registration moves your campus story forward. Build traction, cross milestones and unlock rewards that get bigger with your impact.
+      </p>
+    </header>
+
+    <section class="panel" aria-label="Interactive reward ladder">
+      <div class="controls">
+        <div>
+          <div class="control-label">
+            <span>Move your registration count</span>
+            <span>Tap a milestone or drag the slider</span>
+          </div>
+          <input id="registrationSlider" type="range" min="0" max="200" value="0" step="1" aria-label="Registration count" />
+        </div>
+
+        <div class="score-box">
+          <div class="score-number">
+            <strong id="score">0</strong>
+            <span>registrations</span>
+          </div>
+          <button class="demo-button" id="demoButton" type="button">▶ Play 7-sec demo</button>
+        </div>
+      </div>
+
+      <div class="status" aria-live="polite">
+        <div class="status-icon" id="statusIcon">🧭</div>
+        <div>
+          <p id="statusTitle">Selected as Scout</p>
+          <p id="statusText">Private community access + starter kit</p>
+        </div>
+        <div class="next-pill" id="nextPill">25 to next unlock</div>
+      </div>
+
+      <div class="ladder-wrap">
+        <div class="ladder" id="ladder">
+          <div class="track">
+            <div class="track-fill" id="trackFill"></div>
+            <div class="runner" id="runner">⚡</div>
+          </div>
+
+          <article class="level" data-threshold="0">
+            <span class="level-number">START</span>
+            <span class="lock"></span>
+            <div class="level-icon">🧭</div>
+            <h3>Selected as Scout</h3>
+            <p>Private community access + starter kit</p>
+          </article>
+
+          <article class="level" data-threshold="25">
+            <span class="level-number">25 REGS</span>
+            <span class="lock"></span>
+            <div class="level-icon">🏅</div>
+            <h3>Official Campus Ambassador</h3>
+            <p>Official title, first swag drop + prize-linked challenge</p>
+          </article>
+
+          <article class="level" data-threshold="50">
+            <span class="level-number">50+ REGS</span>
+            <span class="lock"></span>
+            <div class="level-icon">🎪</div>
+            <h3>Campus Builder</h3>
+            <p>Event grants for your campus + exclusive merch</p>
+          </article>
+
+          <article class="level" data-threshold="75">
+            <span class="level-number">75+ REGS</span>
+            <span class="lock"></span>
+            <div class="level-icon">🧠</div>
+            <h3>Momentum Maker</h3>
+            <p>Mentorship access + campus event grants</p>
+          </article>
+
+          <article class="level" data-threshold="100">
+            <span class="level-number">100+ REGS</span>
+            <span class="lock"></span>
+            <div class="level-icon">🚀</div>
+            <h3>EYFI Insider</h3>
+            <p>Paid internship opportunities + ambassador events</p>
+          </article>
+
+          <article class="level" data-threshold="200">
+            <span class="level-number">200+ REGS</span>
+            <span class="lock"></span>
+            <div class="level-icon">⭐</div>
+            <h3>Founding Team Consideration</h3>
+            <p>Consideration for the team shaping EYFI's next wave</p>
+          </article>
+        </div>
+      </div>
+
+      <div class="footer-note">
+        <span>Tip: click any milestone to preview its unlocked state.</span>
+        <span>Concept prototype · EYFI Wave 01</span>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const milestones = [
+      { threshold: 0, title: "Selected as Scout", reward: "Private community access + starter kit", icon: "🧭" },
+      { threshold: 25, title: "Official Campus Ambassador", reward: "Official title, first swag drop + prize-linked challenge", icon: "🏅" },
+      { threshold: 50, title: "Campus Builder", reward: "Event grants for your campus + exclusive merch", icon: "🎪" },
+      { threshold: 75, title: "Momentum Maker", reward: "Mentorship access + campus event grants", icon: "🧠" },
+      { threshold: 100, title: "EYFI Insider", reward: "Paid internship opportunities + ambassador events", icon: "🚀" },
+      { threshold: 200, title: "Founding Team Consideration", reward: "Consideration for the team shaping EYFI's next wave", icon: "⭐" }
+    ];
+
+    const slider = document.getElementById("registrationSlider");
+    const score = document.getElementById("score");
+    const trackFill = document.getElementById("trackFill");
+    const runner = document.getElementById("runner");
+    const levels = [...document.querySelectorAll(".level")];
+    const statusTitle = document.getElementById("statusTitle");
+    const statusText = document.getElementById("statusText");
+    const statusIcon = document.getElementById("statusIcon");
+    const nextPill = document.getElementById("nextPill");
+    const demoButton = document.getElementById("demoButton");
+
+    let previousLevelIndex = 0;
+    let demoTimer = null;
+
+    function currentMilestoneIndex(value) {
+      let index = 0;
+      milestones.forEach((milestone, i) => {
+        if (value >= milestone.threshold) index = i;
+      });
+      return index;
+    }
+
+    function launchConfetti() {
+      const palette = ["#b8ff3d", "#7957ff", "#ff8a34", "#fffdf7"];
+      for (let i = 0; i < 34; i++) {
+        const piece = document.createElement("span");
+        piece.className = "confetti-piece";
+        piece.style.left = `${Math.random() * 100}vw`;
+        piece.style.background = palette[Math.floor(Math.random() * palette.length)];
+        piece.style.setProperty("--drift", `${(Math.random() - .5) * 220}px`);
+        piece.style.animationDelay = `${Math.random() * .25}s`;
+        document.body.appendChild(piece);
+        setTimeout(() => piece.remove(), 1900);
+      }
+    }
+
+    function updateLadder(rawValue, celebrate = true) {
+      const value = Number(rawValue);
+      const percent = (value / 200) * 100;
+      const activeIndex = currentMilestoneIndex(value);
+      const active = milestones[activeIndex];
+      const next = milestones[activeIndex + 1];
+
+      slider.value = value;
+      slider.style.setProperty("--fill", `${percent}%`);
+      score.textContent = value;
+      trackFill.style.width = `${percent}%`;
+      runner.style.left = `${percent}%`;
+
+      levels.forEach((level, index) => {
+        const threshold = Number(level.dataset.threshold);
+        level.classList.toggle("unlocked", value >= threshold);
+        level.classList.toggle("current", index === activeIndex);
+      });
+
+      statusTitle.textContent = active.title;
+      statusText.textContent = active.reward;
+      statusIcon.textContent = active.icon;
+
+      if (next) {
+        nextPill.textContent = `${next.threshold - value} to next unlock`;
+      } else {
+        nextPill.textContent = "All rewards unlocked ✦";
+      }
+
+      if (celebrate && activeIndex > previousLevelIndex) {
+        launchConfetti();
+      }
+      previousLevelIndex = activeIndex;
+    }
+
+    slider.addEventListener("input", (event) => {
+      if (demoTimer) {
+        clearInterval(demoTimer);
+        demoTimer = null;
+        demoButton.disabled = false;
+        demoButton.textContent = "▶ Play 7-sec demo";
+      }
+      updateLadder(event.target.value);
+    });
+
+    levels.forEach(level => {
+      level.addEventListener("click", () => updateLadder(level.dataset.threshold));
+    });
+
+    demoButton.addEventListener("click", () => {
+      if (demoTimer) return;
+
+      let value = 0;
+      previousLevelIndex = 0;
+      demoButton.disabled = true;
+      demoButton.textContent = "Demo playing…";
+      updateLadder(0, false);
+
+      demoTimer = setInterval(() => {
+        value += 4;
+        if (value >= 200) {
+          value = 200;
+          updateLadder(value);
+          clearInterval(demoTimer);
+          demoTimer = null;
+          demoButton.disabled = false;
+          demoButton.textContent = "↻ Replay demo";
+          return;
+        }
+        updateLadder(value);
+      }, 135);
+    });
+
+    updateLadder(0, false);
+  </script>
+</body>
+</html>
