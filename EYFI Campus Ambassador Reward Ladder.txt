@@ -1,0 +1,23 @@
+EYFI Campus Ambassador Reward Ladder
+
+- I designed and developed a responsive, interactive reward ladder that transforms the EYFI ambassador milestones into a gamified progression journey. 
+
+- I developed the module as a lightweight, self-contained HTML prototype with embedded CSS and vanilla JavaScript, making it easy to preview, deploy and integrate without additional dependencies.
+
+- The experience includes:
+
+-> a registration slider, 
+-> clickable milestones, 
+-> locked/unlocked/current states, 
+-> live next-reward calculations, 
+-> milestone celebrations(confetti), 
+-> a mobile-friendly vertical layout, and 
+-> a seven-second automated demo;
+
+- I also refined the design through multiple Git commits to align it with EYFI’s visual identity and the exact reward requirements.
+
+Live prototype:
+https://brionysayani.github.io/eyfi-reward-ladder-module/
+
+Source code:
+https://github.com/brionysayani/eyfi-reward-ladder-module
